@@ -1,30 +1,30 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:bt_football/provider/matchProvider.dart';
+import 'package:bt_football/widget/crestWidget.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:football_app/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  setUpAll(() {
+    //this is to allow http connections when testing.Not strictly correct but will suffice for this demo
+    HttpOverrides.global = null;
+  });
+  test("API Tests", () async {
+    var match = await MatchProvider.getMatches();
+    expect(match.competition.name, 'Premier League');
+    var team = await MatchProvider.getTeam(64);
+    expect(team.name, 'Liverpool FC');
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('crest image test', (WidgetTester tester) async {
+    //standard pictures
+    await tester.pumpWidget(CrestWidget(
+      imageurl: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    ));
+    //svg
+    await tester.pumpWidget(CrestWidget(
+      imageurl: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg',
+    ));
+    // Test code goes here.
   });
 }
