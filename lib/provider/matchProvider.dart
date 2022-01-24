@@ -86,7 +86,6 @@ class MatchProvider with ChangeNotifier {
       final String formattedCurrentDate = formatter.format(endDate);
       resultObject = await matchApiCall(formattedFromDate, formattedCurrentDate);
     }
-
     return resultObject;
   }
 
