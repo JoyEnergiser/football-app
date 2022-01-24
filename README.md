@@ -12,17 +12,17 @@ I have finished working on the football app.I know you asked me to do it with th
 
 clone it to your local folder and populate the packages
 
-git clone https://github.com/JoyEnergiser/football-app.git
+**git clone https://github.com/JoyEnergiser/football-app.git**
 
 I'm assuming you have your IDE setup for debugging already with a device setup, open it on the newly created folder then 
 
-######flutter pub get
-######Flutter run
+**flutter pub get**
+**Flutter run**
 
 
 For the tests 
 
-######flutter test
+**flutter test**
 
 
 
